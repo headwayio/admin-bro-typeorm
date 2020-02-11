@@ -169,6 +169,8 @@ export class Resource extends BaseResource
     public async findOne(id)
     {
         const instance = await this.model.findOne(id);
+        if (!instance) { return null; }
+
         const record = new ExtendedRecord(instance, this);
         record.setTitle(await getTitle(instance));
         return record;

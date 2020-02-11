@@ -8,7 +8,7 @@ export class ExtendedRecord extends BaseRecord
     private _instance: BaseEntity | null = null;
     private _customTitle: string | null = null;
 
-    constructor(instance: BaseEntity | null | undefined, resource: Resource)
+    constructor(instance: BaseEntity, resource: Resource)
     {
         super(instance, resource);
 

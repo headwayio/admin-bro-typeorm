@@ -136,7 +136,7 @@ describe("Resource", () => {
     });
 
     describe("#update", () => {
-        let record: BaseRecord;
+        let record: BaseRecord | null;
 
         beforeEach(async () => {
             const params = await resource.create({
@@ -153,16 +153,21 @@ describe("Resource", () => {
 
         it("updates record name", async () => {
             const ford = "Ford";
+            if (record === null) { return; }
+
             await resource.update(record.id(), {
                 name: ford
             });
             const recordInDb = await resource.findOne(record.id());
+            if (recordInDb === null) { return; }
 
             expect(recordInDb.param("name")).to.equal(ford);
         });
 
         it("throws error when wrong name is given", async () => {
             const age = 123131;
+            if (record === null) { return; }
+
             try {
                 await resource.update(record.id(), { age });
             } catch (error) {
